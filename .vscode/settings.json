@@ -16,7 +16,6 @@
     "**/.env.development.local": true,
     "**/.env.test.local": true,
     "**/.env.production.local": true,
-    "**/.vercel": true,
-    "**/.resources": false
+    "**/.vercel": true
   }
 }
