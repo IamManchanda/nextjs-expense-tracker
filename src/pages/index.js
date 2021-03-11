@@ -1,4 +1,9 @@
 import Head from "next/head";
+import { GlobalProvider } from "../contexts/global-state";
+import YourBalance from "../components/your-balance";
+import IncomeExpenses from "../components/income-expenses";
+import TransactionList from "../components/transaction-list";
+import AddTransaction from "../components/add-transaction";
 
 function PageIndex() {
   return (
@@ -13,11 +18,15 @@ function PageIndex() {
         />
       </Head>
 
-      <main>
-        <h1>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-      </main>
+      <GlobalProvider>
+        <h2>Expense Tracker</h2>
+        <div className="container">
+          <YourBalance />
+          <IncomeExpenses />
+          <TransactionList />
+          <AddTransaction />
+        </div>
+      </GlobalProvider>
     </div>
   );
 }
