@@ -17,10 +17,10 @@ export const GlobalProvider = ({ children }) => {
 
   async function getTransactions() {
     try {
-      const response = await fetcher(`${NEXT_PUBLIC_API_URL}/transactions`);
+      const { data } = await fetcher(`${NEXT_PUBLIC_API_URL}/transactions`);
       dispatch({
         type: "GET_TRANSACTIONS",
-        payload: response.data,
+        payload: data,
       });
     } catch (error) {
       dispatch({
