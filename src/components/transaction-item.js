@@ -14,7 +14,7 @@ const TransactionItem = ({ transaction }) => {
         {moneyFormatter(transaction.amount)}
       </span>
       <button
-        onClick={() => deleteTransaction(transaction.id)}
+        onClick={() => deleteTransaction(transaction._id)}
         className="delete-btn"
       >
         x

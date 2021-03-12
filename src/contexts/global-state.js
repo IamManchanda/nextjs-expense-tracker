@@ -25,23 +25,47 @@ export const GlobalProvider = ({ children }) => {
     } catch (error) {
       dispatch({
         type: "TRANSACTION_ERROR",
-        payload: error.response.data.error,
+        payload: error.error,
       });
     }
   }
 
-  function deleteTransaction(id) {
-    dispatch({
-      type: "DELETE_TRANSACTION",
-      payload: id,
-    });
+  async function deleteTransaction(id) {
+    try {
+      await fetcher(`${NEXT_PUBLIC_API_URL}/transactions/${id}`, {
+        method: "DELETE",
+      });
+      dispatch({
+        type: "DELETE_TRANSACTION",
+        payload: id,
+      });
+    } catch (error) {
+      dispatch({
+        type: "TRANSACTION_ERROR",
+        payload: error.error,
+      });
+    }
   }
 
-  function addTransaction(transaction) {
-    dispatch({
-      type: "ADD_TRANSACTION",
-      payload: transaction,
-    });
+  async function addTransaction(transaction) {
+    try {
+      const { data } = await fetcher(`${NEXT_PUBLIC_API_URL}/transactions`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(transaction),
+      });
+      dispatch({
+        type: "ADD_TRANSACTION",
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: "TRANSACTION_ERROR",
+        payload: error.error,
+      });
+    }
   }
 
   return (
